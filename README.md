@@ -1,58 +1,239 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🛴 ScootBerlin
+Scalable Shared Electric Scooter Backend
 
-## About Laravel
+A production-inspired backend platform built with Laravel, PostgreSQL, PostGIS, Redis, Docker, and Stripe.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🚧 Status: In Development   •   📍 Current Milestone: Infrastructure & System Architecture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 About The Project
 
-## Learning Laravel
+ScootBerlin is a backend-focused portfolio project that simulates the core infrastructure of a modern shared electric scooter platform.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+The goal is not simply to build CRUD APIs, but to demonstrate production-ready backend engineering practices including scalable system design, geospatial data processing, background job processing, secure payment integration, and clean software architecture.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The project is being developed incrementally using a feature-branch workflow, with each milestone documented and implemented following professional software development practices.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## ✨ Features
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 🔐 Authentication & Authorization
 
-```bash
-composer require laravel/boost --dev
+* User Registration & Login
+* Laravel Sanctum Authentication
+* Role-Based Access Control (RBAC)
+* Protected REST APIs
 
-php artisan boost:install
+### 🛴 Scooter Management
+
+* Scooter Registration
+* Scooter Availability Management
+* Battery Monitoring
+* Scooter Status Tracking
+* Maintenance Management
+
+### 📍 GPS Location Service
+
+* High-Frequency GPS Ingestion
+* Real-Time Scooter Location Updates
+* Nearby Scooter Search
+* Geospatial Queries with PostGIS
+
+### 🚴 Ride Management
+
+* Start Ride
+* End Ride
+* Ride Duration Calculation
+* Distance Tracking
+* Ride History
+
+### 💳 Billing & Payments
+
+* Stripe Integration
+* Secure Payment Processing
+* Webhook Handling
+* Payment History
+
+### ⚡ Performance
+
+* Redis Caching
+* Background Job Processing
+* Queue Workers
+* Optimized Database Queries
+
+---
+
+## 🏗️ Technology Stack
+
+
+
+| Category         | Technology              |
+| ---------------- | ----------------------- |
+| Backend          | Laravel 13, PHP 8.4     |
+| Database         | PostgreSQL 17 + PostGIS |
+| Cache & Queue    | Redis                   |
+| Web Server       | Nginx                   |
+| Containerization | Docker                  |
+| Payments         | Stripe                  |
+| Authentication   | Laravel Sanctum         |
+| Testing          | Pest, PHPUnit           |
+| Code Quality     | Laravel Pint, PHPStan   |
+| Version Control  | Git & GitHub            |
+
+---
+
+## 📂 Project Modules
+
+* Authentication
+* User Management
+* Scooter Management
+* GPS Tracking
+* Ride Management
+* Billing & Payments
+* Maintenance
+* Administration
+* Reporting
+
+---
+
+## 📈 Project Roadmap
+
+* [x] Docker Development Environment
+* [x] PostgreSQL + PostGIS Setup
+* [x] Redis Integration
+* [x] Infrastructure Architecture
+* [ ] Authentication Module
+* [ ] Scooter Management
+* [ ] GPS Tracking
+* [ ] Nearby Scooter Search
+* [ ] Ride Lifecycle
+* [ ] Stripe Billing
+* [ ] WebSockets
+* [ ] Automated Testing
+* [ ] GitHub Actions CI
+* [ ] Production Deployment
+
+---
+
+## 🏛️ Architecture Overview
+
+The application follows a layered architecture to separate concerns and improve maintainability.
+
+```text
+                Client Applications
+                       │
+                  REST API (Laravel)
+                       │
+      ┌────────────────┼────────────────┐
+      │                │                │
+Authentication   Business Logic   Background Jobs
+      │                │                │
+      └────────────────┼────────────────┘
+                       │
+              PostgreSQL + PostGIS
+                       │
+                    Redis Cache
+                       │
+               Stripe / External APIs
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 📁 Project Structure
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```text
+ScootBerlin/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── docker/
+│   ├── nginx/
+│   └── php/
+├── docs/
+├── public/
+├── resources/
+├── routes/
+├── storage/
+├── tests/
+├── docker-compose.yml
+├── README.md
+└── .env.example
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📚 Documentation
 
-## Security Vulnerabilities
+Detailed project documentation will be maintained inside the **docs/** directory.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* System Architecture
+* Database Design (ERD)
+* Authentication Flow
+* API Standards
+* Deployment Guide
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🛠️ Development Workflow
+
+This project follows a feature-branch Git workflow.
+
+```text
+main
+│
+develop
+│
+├── feature/docker
+├── feature/auth
+├── feature/scooters
+├── feature/gps
+├── feature/rides
+├── feature/billing
+└── feature/websocket
+```
+
+Each feature is developed independently, reviewed, and merged into the **develop** branch before being promoted to **main**.
+
+---
+
+## 🎯 Project Goals
+
+* Build a production-inspired backend platform.
+* Demonstrate scalable API design.
+* Implement geospatial search using PostGIS.
+* Process asynchronous jobs with Redis.
+* Integrate secure payments using Stripe.
+* Apply clean architecture principles.
+* Follow modern Git workflows and engineering best practices.
+
+---
+
+## 🚀 Future Enhancements
+
+* Live Scooter Tracking
+* Fleet Balancing
+* Dynamic Pricing
+* Push Notifications
+* Admin Dashboard
+* Kubernetes Deployment
+* Terraform Infrastructure
+* Monitoring & Observability
+
+---
+
+## 🤝 Contributing
+
+This is currently a personal portfolio project developed for learning and demonstrating backend software engineering practices.
+
+Contributions and suggestions will be welcome in future releases.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
