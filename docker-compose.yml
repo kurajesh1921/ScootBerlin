@@ -56,10 +56,25 @@ services:
 
     networks:
       - scootberlin
+  redis:
+    image: redis:8-alpine
 
+    container_name: scootberlin_redis
+
+    restart: unless-stopped
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+    networks:
+      - scootberlin
 networks:
   scootberlin:
     driver: bridge
 
 volumes:
   postgres_data:
+  redis_data:
