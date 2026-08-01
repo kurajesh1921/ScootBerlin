@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\MeController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use App\Http\Controllers\Api\V1\ScooterController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
@@ -21,6 +22,16 @@ Route::prefix('v1')->group(function () {
             Route::get('/me', MeController::class);
 
         });
+
+    });
+
+    // Protected business APIs
+    Route::middleware('auth:sanctum')->group(function () {
+
+        Route::apiResource('scooters', ScooterController::class)
+            ->parameters([
+                'scooters' => 'scooter:uuid',
+            ]);
 
     });
 

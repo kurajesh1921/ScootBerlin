@@ -13,7 +13,7 @@ class RegisterService
     /**
      * Register a new rider.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function execute(array $data): User
     {
@@ -24,12 +24,12 @@ class RegisterService
         }
 
         return User::create([
-            'role_id'    => $riderRole->id,
-            'name'       => $data['name'],
-            'email'      => $data['email'],
-            'phone'      => $data['phone'] ?? null,
-            'password'   => $data['password'],
-            'is_active'  => true,
+            'role_id' => $riderRole->id,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'] ?? null,
+            'password' => $data['password'],
+            'is_active' => true,
         ]);
     }
 }

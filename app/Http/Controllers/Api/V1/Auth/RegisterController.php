@@ -10,13 +10,11 @@ use App\Http\Resources\UserResource;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\JsonResponse;
 
-
 class RegisterController extends Controller
 {
     public function __construct(
         private readonly RegisterService $registerService
-    ) {
-    }
+    ) {}
 
     public function __invoke(RegisterRequest $request): JsonResponse
     {

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class LoginService
 {
     /**
-     * @param array<string,mixed> $credentials
+     * @param  array<string,mixed>  $credentials
      * @return array<string,mixed>
      */
     public function execute(array $credentials): array
