@@ -33,7 +33,10 @@ class ScooterResource extends JsonResource
                 'latitude' => $this->latitude,
                 'longitude' => $this->longitude,
             ],
-
+            'distance' => $this->when(
+                isset($this->distance),
+                round((float) $this->distance, 2)
+            ),
             'last_seen_at' => $this->last_seen_at,
 
             'created_at' => $this->created_at,

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +59,13 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function rides(): HasMany
+    {
+        return $this->hasMany(Ride::class);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Scooter extends Model
 {
@@ -52,5 +53,13 @@ class Scooter extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(ScooterStatus::class, 'scooter_status_id');
+    }
+    public function reservations(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    public function rides(): HasMany
+    {
+        return $this->hasMany(Ride::class);
     }
 }

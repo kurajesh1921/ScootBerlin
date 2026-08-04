@@ -13,6 +13,9 @@ use App\Services\Scooter\ScooterService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+use App\Http\Requests\NearbyScooterRequest;
+use Illuminate\Support\Facades\DB;
+
 class ScooterController extends Controller
 {
     public function __construct(
@@ -73,5 +76,16 @@ class ScooterController extends Controller
             'success' => true,
             'message' => 'Scooter deleted successfully.',
         ]);
+    }
+    public function nearby(
+        NearbyScooterRequest $request
+    ): AnonymousResourceCollection {
+        $scooters = $this->scooterService->findNearby(
+            latitude: $request->latitude(),
+            longitude: $request->longitude(),
+            radius: $request->radius(),
+        );
+
+        return ScooterResource::collection($scooters);
     }
 }
