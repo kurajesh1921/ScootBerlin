@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\Scooter;
 use App\Models\User;
+use App\Models\ScooterStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -14,7 +15,7 @@ class ReservationTest extends TestCase
 {
     use RefreshDatabase;
     
-    protected bool $seed = true;
+    //protected bool $seed = true;
 
     public function test_user_can_reserve_available_scooter(): void
     {
@@ -22,8 +23,10 @@ class ReservationTest extends TestCase
 
         Sanctum::actingAs($user);
 
+        $availableStatus = ScooterStatus::where('slug', 'available')->firstOrFail();
+
         $scooter = Scooter::factory()->create([
-            'scooter_status_id' => 1,
+            'scooter_status_id' => $availableStatus->id,
         ]);
 
         $response = $this->postJson( "/api/v1/scooters/{$scooter->uuid}/reserve"
