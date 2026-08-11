@@ -10,6 +10,7 @@ use App\Models\ScooterStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 
 class ReservationTest extends TestCase
 {
@@ -27,6 +28,7 @@ class ReservationTest extends TestCase
 
         $scooter = Scooter::factory()->create([
             'scooter_status_id' => $availableStatus->id,
+            'vehicle_number' => 'TEST-' . \Illuminate\Support\Str::uuid(),
         ]);
 
         $response = $this->postJson( "/api/v1/scooters/{$scooter->uuid}/reserve"

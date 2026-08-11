@@ -11,7 +11,7 @@ use App\Models\ScooterStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
-
+use Illuminate\Auth\Access\AuthorizationException;
 class RideService
 {
     public function startRide(
@@ -58,7 +58,7 @@ class RideService
             * Verify reservation owner
             */
             if ($reservation->user_id !== $user->id) {
-                throw new RuntimeException(
+                throw new AuthorizationException(
                     'This reservation belongs to another user.'
                 );
             }
