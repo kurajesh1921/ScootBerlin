@@ -10,6 +10,7 @@ use App\Models\ScooterStatus;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
+use App\Exceptions\ScooterNotAvailableException;
 
 class ReservationService
 {
@@ -25,7 +26,7 @@ class ReservationService
                 ->findOrFail($scooter->id);
 
             if ($scooter->status->slug !== 'available') {
-               throw new ScooterNotAvailableException();
+               throw new ScooterNotAvailableException( 'Scooter is not available.');
             }
 
             $reservation = Reservation::create([
