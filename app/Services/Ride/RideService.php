@@ -14,6 +14,8 @@ use RuntimeException;
 use Illuminate\Auth\Access\AuthorizationException;
 use App\Exceptions\ReservationExpiredException;
 use App\Exceptions\RideAlreadyEndedException;
+use App\Exceptions\ScooterNotReservedException;
+use App\Exceptions\ReservationNotFoundException;
 
 class RideService
 {
@@ -35,7 +37,7 @@ class RideService
              * Scooter must be reserved
              */
             if ($scooter->status->slug !== 'reserved') {
-                throw new RuntimeException(
+                throw new ScooterNotReservedException(
                     'Scooter is not reserved.'
                 );
             }
@@ -52,7 +54,7 @@ class RideService
                 ->first();
 
             if (! $reservation) {
-                throw new RuntimeException(
+                 throw new ReservationNotFoundException(
                     'Reservation not found.'
                 );
             }

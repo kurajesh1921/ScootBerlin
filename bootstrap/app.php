@@ -43,4 +43,20 @@ return Application::configure(basePath: dirname(__DIR__))
             'message' => $e->getMessage(),
         ], 409);
     });
+    $exceptions->render(function (
+    \App\Exceptions\ScooterNotReservedException $e,
+    Request $request
+    ) {
+        return response()->json([
+            'message' => $e->getMessage(),
+        ], 409);
+    });
+    $exceptions->render(function (
+    \App\Exceptions\ReservationNotFoundException $e,
+    Request $request
+) {
+    return response()->json([
+        'message' => $e->getMessage(),
+    ], 409);
+});
     })->create();
