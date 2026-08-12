@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Illuminate\Auth\Access\AuthorizationException;
+use App\Exceptions\ReservationExpiredException;
 class RideService
 {
     public function startRide(
@@ -76,7 +77,7 @@ class RideService
             * Verify reservation has not expired
             */
             if ($reservation->expires_at->isPast()) {
-                throw new RuntimeException(
+                throw new ReservationExpiredException(
                     'Reservation has expired.'
                 );
             }
