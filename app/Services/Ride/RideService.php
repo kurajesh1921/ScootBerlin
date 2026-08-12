@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Illuminate\Auth\Access\AuthorizationException;
 use App\Exceptions\ReservationExpiredException;
+use App\Exceptions\RideAlreadyEndedException;
+
 class RideService
 {
     public function startRide(
@@ -142,7 +144,7 @@ class RideService
             ->findOrFail($ride->scooter_id);
 
             if ($ride->user_id !== $user->id) {
-                throw new RuntimeException(
+                throw new AuthorizationException(
                     'This ride belongs to another user.'
                 );
             }
@@ -150,7 +152,7 @@ class RideService
             * Verify ride has not already ended
             */
             if ($ride->ended_at !== null) {
-                throw new RuntimeException(
+                throw new RideAlreadyEndedException(
                     'Ride has already ended.'
                 );
             }
