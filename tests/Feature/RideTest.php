@@ -62,5 +62,11 @@ class RideTest extends TestCase
 
         $this->assertNotNull($reservation);
         $this->assertNotNull($reservation->started_at);
+        $scooter->refresh();
+
+    $this->assertSame(
+        'in_use',
+        $scooter->status->slug
+    );
     }
 }

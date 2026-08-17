@@ -10,6 +10,7 @@ use App\Models\ScooterStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+use Illuminate\Support\Carbon;
 
 class EndRideTest extends TestCase
 {
@@ -43,6 +44,18 @@ class EndRideTest extends TestCase
         $unlockResponse->assertCreated();
 
         $rideUuid = $unlockResponse->json('data.uuid');
+
+        $ride = \App\Models\Ride::where('uuid', $rideUuid)->firstOrFail();
+
+        $startedAt = Carbon::parse('2026-08-17 10:00:00');
+
+        $ride->update([
+            'started_at' => $startedAt,
+        ]);
+
+        Carbon::setTestNow(
+            Carbon::parse('2026-08-17 10:05:30')
+        );
 
         $response = $this->postJson(
             "/api/v1/rides/{$rideUuid}/end",
@@ -79,5 +92,12 @@ class EndRideTest extends TestCase
         $this->assertDatabaseHas('rides', [
             'id' => $ride->id,
         ]);
+        $scooter->refresh();
+
+        $this->assertSame(
+            'available',
+            $scooter->status->slug
+        );
+        Carbon::setTestNow();
     }
 }
