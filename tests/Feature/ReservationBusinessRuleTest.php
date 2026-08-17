@@ -32,7 +32,17 @@ class ReservationBusinessRuleTest extends TestCase
         $this->postJson(
             "/api/v1/scooters/{$scooter->uuid}/reserve"
         )->assertCreated();
+        $this->assertDatabaseHas('reservations', [
+            'user_id' => $userA->id,
+            'scooter_id' => $scooter->id,
+        ]);
 
+        $scooter->refresh();
+
+        $this->assertSame(
+            'reserved',
+            $scooter->status->slug
+        );
         Sanctum::actingAs($userB);
         $response = $this->postJson(
             "/api/v1/scooters/{$scooter->uuid}/reserve"
