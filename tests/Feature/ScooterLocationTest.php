@@ -116,4 +116,27 @@ class ScooterLocationTest extends TestCase
             'battery_percentage',
         ]);
     }
+    public function test_unauthenticated_user_cannot_update_scooter_location(): void
+    {
+        $availableStatus = \App\Models\ScooterStatus::where(
+            'slug',
+            'available'
+        )->firstOrFail();
+
+        $scooter = Scooter::factory()->create([
+            'scooter_status_id' => $availableStatus->id,
+            'vehicle_number' => 'TEST-' . Str::uuid(),
+        ]);
+
+        $response = $this->postJson(
+            "/api/v1/scooters/{$scooter->uuid}/location",
+            [
+                'latitude' => 52.520008,
+                'longitude' => 13.404954,
+                'battery_percentage' => 80,
+            ]
+        );
+        
+        $response->assertUnauthorized();
+    }
 }
